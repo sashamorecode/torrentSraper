@@ -20,6 +20,7 @@ def search_view(request):
     return render(request, "index.html", {"magnets": magnets, "userSearch": " for " + searchTerm})
 
 def getMagnet(searchTerm, resCount):
+    resCount = min(resCount, 30)
     localMagnets = MagnetLink.objects.filter(magnetName__contains=searchTerm)
     if localMagnets and 2*len(localMagnets) > resCount: #rescount is number or res per site so we mutl by 2 to account for duplicates
         magnetUrls = [magnet.magnetUrl for magnet in localMagnets]
@@ -30,4 +31,4 @@ def getMagnet(searchTerm, resCount):
     for i in range(len(magnetUrls)):
         magnet = MagnetLink(magnetName=magnetNames[i], magnetUrl=magnetUrls[i])
         magnet.save()   
-    return magnetUrls, magnetNames
+    return magnetUrls[:min(resCount,len(magnetUrls)-1)], magnetNames[:min(resCount,len(magnetNames)-1)]
