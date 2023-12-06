@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body id="rootBody">
+    <h1 id="head1">METASEARCHER</h1>
+    <form id="searchForm">
+        <label for="searchTerm">Search:</label><br>
+        <input type="text" id="searchTerm" name="searchTerm"><br>
+        <label for="resCount"> Number of results per site </label><br>
+        <input type="number" id="resCount" name="resCount" min="1" max="30" value="5"><br>
+        <button type="submit">Submit</button>
+    </form> 
+    <div id="searchResults"> <h2>results {{userSearch}} :</h2><br><br>
+        {% for name,link in magnets.items %}
+            <a href="{{ link }}" style="color: rgb(50, 51, 129);">{{ name }}</a><br>
+        {% endfor %}
+    </div>
+    </body>
+
+    <style>
+        #searchResults {
+            background-color: gray;
+            flex:1;
+            padding : 2vmin;
+            border-radius: 1vmin;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #head1 {
+            text-align: center;
+            flex: 1;
+        }
+        #searchForm {
+            text-align: center;
+            flex: 1;
+        }
+        #rootBody {
+            background-color: lightgray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    </style>
+</html>
